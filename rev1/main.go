@@ -5,51 +5,50 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"strconv"
 	"strings"
 )
 
 // Если значение не нулевое, вернуть максимальное значение для типа
 func getIntMaxValue(in8 int8, in16 int16, in32 int32, in64 int64) (int8, int16, int32, int64) {
-	var mInt8 int8 = math.MaxInt8
-	var mInt16 int16 = math.MaxInt16
-	var mInt32 int32 = math.MaxInt32
-	var mInt64 int64 = math.MaxInt64
+	var mInt8 int8
+	var mInt16 int16
+	var mInt32 int32
+	var mInt64 int64
 	if in8 != 0 {
-		return mInt8, 0, 0, 0
+		mInt8 = int8(1<<(8-1) - 1)
 	}
 	if in16 != 0 {
-		return 0, mInt16, 0, 0
+		mInt16 = int16(1<<(16-1) - 1)
 	}
 	if in32 != 0 {
-		return 0, 0, mInt32, 0
+		mInt32 = int32(1<<(32-1) - 1)
 	}
 	if in64 != 0 {
-		return 0, 0, 0, mInt64
+		mInt64 = int64(1<<(64-1) - 1)
 	}
-	return 0, 0, 0, 0
+	return mInt8, mInt16, mInt32, mInt64
 }
 
 // Если значение не нулевое, вернуть максимальное значение для типа
 func getUintMaxValue(uin8 uint8, uin16 uint16, uin32 uint32, uin64 uint64) (uint8, uint16, uint32, uint64) {
-	var muin8 uint8 = math.MaxUint8
-	var mInt16 uint16 = math.MaxUint16
-	var mInt32 uint32 = math.MaxUint32
-	var mInt64 uint64 = math.MaxUint64
+	var muin8 uint8
+	var mInt16 uint16
+	var mInt32 uint32
+	var mInt64 uint64
 	if uin8 != 0 {
-		return muin8, 0, 0, 0
+		muin8 = uint8(1<<(8) - 1)
 	}
 	if uin16 != 0 {
-		return 0, mInt16, 0, 0
+		mInt16 = uint16(1<<(16) - 1)
 	}
 	if uin32 != 0 {
-		return 0, 0, mInt32, 0
+		mInt32 = uint32(1<<(32) - 1)
 	}
 	if uin64 != 0 {
-		return 0, 0, 0, mInt64
+		mInt64 = uint64(1<<(64) - 1)
 	}
-	return 0, 0, 0, 0
+	return muin8, mInt16, mInt32, mInt64
 }
 
 func getBits(v interface{}) int {
@@ -60,7 +59,7 @@ func getBits(v interface{}) int {
 	return bits
 }
 func main() {
-	fmt.Println(getIntMaxValue(0, 5, 0, 0))
+	fmt.Println(getIntMaxValue(0, 5, 3, 0))
 	fmt.Println(getUintMaxValue(0, 0, 3, 0))
 	//g1 := getBits(42241)
 	//g2 := getBits(12)
